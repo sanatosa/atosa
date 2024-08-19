@@ -227,7 +227,7 @@
             { id: "77859", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS AZUL CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77859.jpg" }
         ];
 
-        const containerVolume = 76.4; // Volumen total del contenedor en metros cúbicos
+        const containerVolume = 65; // Volumen total del contenedor en metros cúbicos
 
         function updateContainer() {
             let totalVolume = 0;
@@ -312,7 +312,7 @@
                     <h3>${chair.id} - ${chair.name}</h3>
                     <p>Precio: ${chair.price.toFixed(2)} €</p>
                     <div class="quantity-container">
-                        <label for="quantity-${chair.id}">Cantidad:</label>
+                        <label for="quantity-${chair.id}">Cantidad Cajas:</label>
                         <input type="number" id="quantity-${chair.id}" min="0" value="0" onchange="updateContainer(); showQuantityFeedback('${chair.id}')">
                     </div>
                     <div id="feedback-${chair.id}" class="quantity-feedback"></div>
@@ -334,7 +334,7 @@
                         <img src="images/${chair.image}" alt="${chair.name}">
                         <div>
                             <h3>${chair.id} - ${chair.name}</h3>
-                            <p>Cantidad: ${quantity}</p>
+                            <p>Cantidad Cajas: ${quantity}</p>
                             <p>Precio unitario: ${chair.price.toFixed(2)} €</p>
                             <p>Subtotal: ${(chair.price * quantity).toFixed(2)} €</p>
                         </div>
