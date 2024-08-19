@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora ATOSA para Contenedor de Sillas de Playa</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+        .chair-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .chair-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .chair-item img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+        .chair-item h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .status-box {
+            background-color: #f0f0f0;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        #container-status, #total-cost {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #container-progress {
+            width: 100%;
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        #container-progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #4CAF50;
+            transition: width 0.5s ease-in-out;
+        }
+        #advance-payment {
+            font-size: 16px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #FF5722;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .quantity-feedback {
+            color: green;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        .quantity-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        #order-summary {
+            margin-top: 30px;
+        }
+        #order-summary h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .summary-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .summary-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-right: 20px;
+        }
+        .summary-item h3 {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .summary-item p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .chair-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            .chair-item h3 {
+                font-size: 14px;
+            }
+            #container-status, #total-cost {
+                font-size: 16px;
+            }
+            #advance-payment {
+                font-size: 14px;
+            }
+            .summary-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .summary-item img {
+                width: 100%;
+                height: auto;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chair-grid {
+                grid-template-columns: 1fr;
+            }
+            input[type="number"] {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora ATOSA para Contenedor de Sillas de Playa</h1>
+    <div class="chair-grid" id="chair-list">
+        <!-- Las sillas se agregarán aquí dinámicamente -->
+    </div>
+    <div class="status-box">
+        <div id="container-status"></div>
+        <div id="container-progress">
+            <div id="container-progress-bar"></div>
+        </div>
+        <div id="total-cost"></div>
+        <div id="advance-payment"></div>
+    </div>
+    <div id="order-summary">
+        <h2>Resumen del Pedido</h2>
+        <div id="summary-list"></div>
+    </div>
+
+    <script>
+        const chairs = [
+            { id: "76410", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 MARINERO", price: 21.08, volume: 0.17, image: "76410.jpg" },
+            { id: "76462", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "76462.jpg" },
+            { id: "76463", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 MARINERO", price: 17.49, volume: 0.23, image: "76463.jpg" },
+            { id: "76464", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "76464.jpg" },
+            { id: "77727", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 25.94, volume: 0.17, image: "77727.jpg" },
+            { id: "77728", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77728.jpg" },
+            { id: "77729", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 18.14, volume: 0.23, image: "77729.jpg" },
+            { id: "77730", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 23.79, volume: 0.21, image: "77730.jpg" },
+            { id: "77732", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 21.72, volume: 0.17, image: "77732.jpg" },
+            { id: "77733", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77733.jpg" },
+            { id: "77734", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 18.14, volume: 0.23, image: "77734.jpg" },
+            { id: "77735", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.28, volume: 0.21, image: "77735.jpg" },
+            { id: "77848", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.41, volume: 0.17, image: "77848.jpg" },
+            { id: "77849", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 RAYAS VERDE", price: 21.08, volume: 0.17, image: "77849.jpg" },
+            { id: "77850", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.08, volume: 0.17, image: "77850.jpg" },
+            { id: "77851", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 24.46, volume: 0.21, image: "77851.jpg" },
+            { id: "77852", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77852.jpg" },
+            { id: "77853", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYA AZUL CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77853.jpg" },
+            { id: "77854", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 AZUL", price: 17.81, volume: 0.23, image: "77854.jpg" },
+            { id: "77855", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS VERDE", price: 17.49, volume: 0.23, image: "77855.jpg" },
+            { id: "77856", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS AZUL", price: 17.49, volume: 0.23, image: "77856.jpg" },
+            { id: "77857", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 23.95, volume: 0.21, image: "77857.jpg" },
+            { id: "77858", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77858.jpg" },
+            { id: "77859", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS AZUL CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77859.jpg" }
+        ];
+
+        const containerVolume = 76.4; // Volumen total del contenedor en metros cúbicos
+
+        function updateContainer() {
+            let totalVolume = 0;
+            let totalCost = 0;
+
+            chairs.forEach((chair) => {
+                const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
+                totalVolume += chair.volume * quantity;
+                totalCost += chair.price * quantity;
+            });
+
+            const containerStatus = document.getElementById('container-status');
+            const totalCostElement = document.getElementById('total-cost');
+            const advancePaymentElement = document.getElementById('advance-payment');
+            const containerProgressBar = document.getElementById('container-progress-bar');
+
+            const percentageOccupied = (totalVolume / containerVolume) * 100;
+            containerStatus.textContent = `El contenedor está al ${percentageOccupied.toFixed(2)}% de su capacidad total`;
+            totalCostElement.textContent = `Coste total: ${totalCost.toFixed(2)} €`;
+            
+            const advancePayment = totalCost * 0.20;
+            advancePaymentElement.textContent = `Pago por adelantado (20%): ${advancePayment.toFixed(2)} €`;
+
+            containerProgressBar.style.width = `${Math.min(percentageOccupied, 100)}%`;
+
+            if (percentageOccupied > 100) {
+                containerStatus.style.color = 'red';
+                containerProgressBar.style.backgroundColor = 'red';
+            } else if (percentageOccupied === 100) {
+                containerStatus.style.color = 'green';
+                containerProgressBar.style.backgroundColor = 'green';
+            } else {
+                containerStatus.style.color = 'black';
+                containerProgressBar.style.backgroundColor = '#4CAF50';
+            }
+
+            updateOrderSummary();
+        }
+
+        function showQuantityFeedback(id) {
+            const feedbackElement = document.getElementById(`feedback-${id}`);
+            feedbackElement.style.display = 'block';
+            
+            let totalVolume = 0;
+            chairs.forEach((chair) => {
+                const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
+                totalVolume += chair.volume * quantity;
+            });
+            
+            const percentageOccupied = (totalVolume / containerVolume) * 100;
+            feedbackElement.textContent = `Cantidad actualizada. El contenedor está al ${percentageOccupied.toFixed(2)}% de su capacidad.`;
+            
+            if (percentageOccupied > 100) {
+                feedbackElement.style.color = 'red';
+                feedbackElement.textContent += " ¡Contenedor sobrepasado!";
+            } else if (percentageOccupied === 100) {
+                feedbackElement.style.color = 'green';
+                feedbackElement.textContent += " ¡Contenedor lleno!";
+            } else {
+                feedbackElement.style.color = 'green';
+            }
+            
+            setTimeout(() => {
+                feedbackElement.style.display = 'none';
+            }, 3000);
+        }
+
+        function initializeChairList() {
+            const chairList = document.getElementById('chair-list');
+            chairs.forEach((chair) => {
+                const chairElement = document.createElement('div');
+                chairElement.className = 'chair-item';
+                chairElement.innerHTML = `
+                    <img src="images/${chair.image}" alt="${chair.name}">
+                    <h3>${chair.name}</h3>
+                    <p>Precio: ${chair.price.toFixed(2)} €</p>
+                    <div class="quantity-container">
+                        <label for="quantity-${chair.id}">Cantidad:</label>
+                        <input type="number" id="quantity-${chair.id}" min="0" value="0" onchange="updateContainer(); showQuantityFeedback('${chair.id}')">
+                    </div>
+                    <div id="feedback-${chair.id}" class="quantity-feedback"></div>
+                `;
+                chairList.appendChild(chairElement);
+            });
+        }
+
+        function updateOrderSummary() {
+            const summaryList = document.getElementById('summary-list');
+            summaryList.innerHTML = '';
+
+            chairs.forEach((chair) => {
+                const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
+                if (quantity > 0) {
+                    const summaryItem = document.createElement('div');
+                    summaryItem.className = 'summary-item';
+                    summaryItem.innerHTML = `
+                        <img src="images/${chair.image}" alt="${chair.name}">
+                        <div>
+                            <h3>${chair.name}</h3>
+                            <p>Cantidad: ${quantity}</p>
+                            <p>Precio unitario: ${chair.price.toFixed(2)} €</p>
+                            <p>Subtotal: ${(chair.price * quantity).toFixed(2)} €</p>
+                        </div>
+                    `;
+                    summaryList.appendChild(summaryItem);
+                }
+            });
+        }
+
+        initializeChairList();
+        updateContainer();
+    </script>
+</body>
+</html>
