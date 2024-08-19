@@ -236,7 +236,7 @@
 
             chairs.forEach((chair) => {
                 const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
-                totalVolume += chair.volume * quantity;
+                totalVolume += (chair.volume * 35.314) * quantity; // Multiplicamos por 35.314 para corregir el cubicaje
                 totalCost += chair.price * quantity;
                 if (quantity > 0) {
                     anyChairSelected = true;
@@ -281,7 +281,7 @@
             let totalVolume = 0;
             chairs.forEach((chair) => {
                 const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
-                totalVolume += chair.volume * quantity;
+                totalVolume += (chair.volume * 35.314) * quantity; // Multiplicamos por 35.314 para corregir el cubicaje
             });
             
             const percentageOccupied = (totalVolume / containerVolume) * 100;
