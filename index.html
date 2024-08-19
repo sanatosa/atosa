@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora ATOSA para Contenedor de Sillas de Playa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -120,6 +121,20 @@
             font-size: 14px;
             margin: 5px 0;
         }
+        #download-button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #download-button:hover {
+            background-color: #45a049;
+        }
 
         @media (max-width: 768px) {
             body {
@@ -179,6 +194,7 @@
         <h2>Resumen del Pedido</h2>
         <div id="summary-list"></div>
     </div>
+    <button id="download-button" onclick="downloadExcel()">Descargar Pedido</button>
 
     <script>
         const chairs = [
@@ -213,17 +229,22 @@
         function updateContainer() {
             let totalVolume = 0;
             let totalCost = 0;
+            let anyChairSelected = false;
 
             chairs.forEach((chair) => {
                 const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
                 totalVolume += chair.volume * quantity;
                 totalCost += chair.price * quantity;
+                if (quantity > 0) {
+                    anyChairSelected = true;
+                }
             });
 
             const containerStatus = document.getElementById('container-status');
             const totalCostElement = document.getElementById('total-cost');
             const advancePaymentElement = document.getElementById('advance-payment');
             const containerProgressBar = document.getElementById('container-progress-bar');
+            const downloadButton = document.getElementById('download-button');
 
             const percentageOccupied = (totalVolume / containerVolume) * 100;
             containerStatus.textContent = `El contenedor está al ${percentageOccupied.toFixed(2)}% de su capacidad total`;
@@ -244,6 +265,8 @@
                 containerStatus.style.color = 'black';
                 containerProgressBar.style.backgroundColor = '#4CAF50';
             }
+
+            downloadButton.style.display = anyChairSelected ? 'block' : 'none';
 
             updateOrderSummary();
         }
@@ -283,7 +306,7 @@
                 chairElement.className = 'chair-item';
                 chairElement.innerHTML = `
                     <img src="images/${chair.image}" alt="${chair.name}">
-                    <h3>${chair.name}</h3>
+                    <h3>${chair.id} - ${chair.name}</h3>
                     <p>Precio: ${chair.price.toFixed(2)} €</p>
                     <div class="quantity-container">
                         <label for="quantity-${chair.id}">Cantidad:</label>
@@ -307,7 +330,7 @@
                     summaryItem.innerHTML = `
                         <img src="images/${chair.image}" alt="${chair.name}">
                         <div>
-                            <h3>${chair.name}</h3>
+                            <h3>${chair.id} - ${chair.name}</h3>
                             <p>Cantidad: ${quantity}</p>
                             <p>Precio unitario: ${chair.price.toFixed(2)} €</p>
                             <p>Subtotal: ${(chair.price * quantity).toFixed(2)} €</p>
@@ -316,6 +339,72 @@
                     summaryList.appendChild(summaryItem);
                 }
             });
+        }
+
+        async function downloadExcel() {
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.aoa_to_sheet([
+                ['Código', 'Nombre', 'Cantidad', 'Precio Unitario', 'Subtotal', 'Imagen']
+            ]);
+
+            let row = 1;
+            for (const chair of chairs) {
+                const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
+                if (quantity > 0) {
+                    const subtotal = chair.price * quantity;
+                    XLSX.utils.sheet_add_aoa(worksheet, [[
+                        chair.id,
+                        chair.name,
+                        quantity,
+                        chair.price.toFixed(2),
+                        subtotal.toFixed(2),
+                        '(Imagen)'
+                    ]], { origin: -1 });
+
+                    // Añadir imagen
+                    try {
+                        const imgBlob = await fetch(`images/${chair.image}`).then(r => r.blob());
+                        const base64 = await new Promise((resolve) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve(reader.result.split(',')[1]);
+                            reader.readAsDataURL(imgBlob);
+                        });
+
+                        const imgId = workbook.addImage({
+                            base64: base64,
+                            extension: 'jpg',
+                        });
+
+                        worksheet['!images'] = worksheet['!images'] || [];
+                        worksheet['!images'].push({
+                            image: imgId,
+                            range: {
+                                s: { r: row, c: 5 },
+                                e: { r: row + 1, c: 6 }
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Error al cargar la imagen:', error);
+                    }
+
+                    row++;
+                }
+            }
+
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Pedido');
+
+            // Ajustar ancho de columnas
+            const wscols = [
+                {wch: 10},
+                {wch: 50},
+                {wch: 10},
+                {wch: 15},
+                {wch: 15},
+                {wch: 20}
+            ];
+            worksheet['!cols'] = wscols;
+
+            XLSX.writeFile(workbook, 'Pedido_Sillas_Playa.xlsx');
         }
 
         initializeChairList();
