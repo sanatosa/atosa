@@ -11,7 +11,7 @@
         }
         body {
             font-family: Arial, sans-serif;
-            max-width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
@@ -102,7 +102,7 @@
         }
         .summary-item {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 10px;
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
@@ -157,6 +157,7 @@
             }
             .summary-item {
                 flex-direction: column;
+                align-items: flex-start;
             }
             .summary-item img {
                 width: 100%;
@@ -172,10 +173,6 @@
             }
             input[type="number"] {
                 width: 50px;
-            }
-            .quantity-container {
-                flex-direction: column;
-                align-items: flex-start;
             }
         }
     </style>
@@ -200,34 +197,34 @@
     <button id="download-button" onclick="downloadExcel()">Descargar Pedido</button>
 
     <script>
-        const products = [
-    { id: 1, name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 MARINERO", price: 21.08, image: "silla1.jpg", volume: 6.003380000000001 },
-    { id: 2, name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 24.14, image: "silla2.jpg", volume: 7.41594 },
-    { id: 3, name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 MARINERO", price: 17.49, image: "silla3.jpg", volume: 8.12222 },
-    { id: 4, name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 23.64, image: "silla4.jpg", volume: 7.41594 },
-    { id: 5, name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 25.94, image: "silla5.jpg", volume: 6.003380000000001 },
-    { id: 6, name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 24.78, image: "silla6.jpg", volume: 7.41594 },
-    { id: 7, name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 18.14, image: "silla7.jpg", volume: 8.12222 },
-    { id: 8, name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 23.79, image: "silla8.jpg", volume: 7.41594 },
-    { id: 9, name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 21.72, image: "silla9.jpg", volume: 6.003380000000001 },
-    { id: 10, name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.78, image: "silla10.jpg", volume: 7.41594 },
-    { id: 11, name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 18.14, image: "silla11.jpg", volume: 8.12222 },
-    { id: 12, name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.28, image: "silla12.jpg", volume: 7.41594 },
-    { id: 13, name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.41, image: "silla13.jpg", volume: 6.003380000000001 },
-    { id: 14, name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 RAYAS VERDE", price: 21.08, image: "silla14.jpg", volume: 6.003380000000001 },
-    { id: 15, name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.08, image: "silla15.jpg", volume: 6.003380000000001 },
-    { id: 16, name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 24.46, image: "silla16.jpg", volume: 7.41594 },
-    { id: 17, name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 24.14, image: "silla17.jpg", volume: 7.41594 },
-    { id: 18, name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYA AZUL CINTA PARA HOMBRO", price: 24.14, image: "silla18.jpg", volume: 7.41594 },
-    { id: 19, name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 AZUL", price: 17.81, image: "silla19.jpg", volume: 8.12222 },
-    { id: 20, name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS VERDE", price: 17.49, image: "silla20.jpg", volume: 8.12222 },
-    { id: 21, name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS AZUL", price: 17.49, image: "silla21.jpg", volume: 8.12222 },
-    { id: 22, name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 23.95, image: "silla22.jpg", volume: 7.41594 },
-    { id: 23, name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 23.64, image: "silla23.jpg", volume: 7.41594 },
-    { id: 24, name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS AZUL CINTA PARA HOMBRO", price: 23.64, image: "silla24.jpg", volume: 7.41594 }
-];
+        const chairs = [
+            { id: "76410", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 MARINERO", price: 21.08, volume: 0.17, image: "76410.jpg" },
+            { id: "76462", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "76462.jpg" },
+            { id: "76463", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 MARINERO", price: 17.49, volume: 0.23, image: "76463.jpg" },
+            { id: "76464", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "76464.jpg" },
+            { id: "77727", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 25.94, volume: 0.17, image: "77727.jpg" },
+            { id: "77728", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77728.jpg" },
+            { id: "77729", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 18.14, volume: 0.23, image: "77729.jpg" },
+            { id: "77730", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 23.79, volume: 0.21, image: "77730.jpg" },
+            { id: "77732", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 21.72, volume: 0.17, image: "77732.jpg" },
+            { id: "77733", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77733.jpg" },
+            { id: "77734", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 18.14, volume: 0.23, image: "77734.jpg" },
+            { id: "77735", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.28, volume: 0.21, image: "77735.jpg" },
+            { id: "77848", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.41, volume: 0.17, image: "77848.jpg" },
+            { id: "77849", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 RAYAS VERDE", price: 21.08, volume: 0.17, image: "77849.jpg" },
+            { id: "77850", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.08, volume: 0.17, image: "77850.jpg" },
+            { id: "77851", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 24.46, volume: 0.21, image: "77851.jpg" },
+            { id: "77852", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77852.jpg" },
+            { id: "77853", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYA AZUL CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77853.jpg" },
+            { id: "77854", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 AZUL", price: 17.81, volume: 0.23, image: "77854.jpg" },
+            { id: "77855", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS VERDE", price: 17.49, volume: 0.23, image: "77855.jpg" },
+            { id: "77856", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS AZUL", price: 17.49, volume: 0.23, image: "77856.jpg" },
+            { id: "77857", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 23.95, volume: 0.21, image: "77857.jpg" },
+            { id: "77858", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77858.jpg" },
+            { id: "77859", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS AZUL CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77859.jpg" }
+        ];
 
-       const containerVolume = 76.4; // Volumen total del contenedor en metros cúbicos
+        const containerVolume = 76.4; // Volumen total del contenedor en metros cúbicos
 
         function updateContainer() {
             let totalVolume = 0;
@@ -236,7 +233,7 @@
 
             chairs.forEach((chair) => {
                 const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
-                totalVolume += (chair.volume * 35.314) * quantity; // Multiplicamos por 35.314 para corregir el cubicaje
+                totalVolume += chair.volume * quantity;
                 totalCost += chair.price * quantity;
                 if (quantity > 0) {
                     anyChairSelected = true;
@@ -281,7 +278,7 @@
             let totalVolume = 0;
             chairs.forEach((chair) => {
                 const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
-                totalVolume += (chair.volume * 35.314) * quantity; // Multiplicamos por 35.314 para corregir el cubicaje
+                totalVolume += chair.volume * quantity;
             });
             
             const percentageOccupied = (totalVolume / containerVolume) * 100;
