@@ -201,34 +201,111 @@
 
     <script>
         const chairs = [
-            { id: "76410", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 MARINERO", price: 21.08, volume: 0.17, image: "76410.jpg", unitsPerBox: 4 },
-            { id: "76462", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "76462.jpg", unitsPerBox: 4 },
-            { id: "76463", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 MARINERO", price: 17.49, volume: 0.23, image: "76463.jpg", unitsPerBox: 4 },
-            { id: "76464", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "76464.jpg", unitsPerBox: 4 },
-            { id: "77727", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 25.94, volume: 0.17, image: "77727.jpg", unitsPerBox: 4 },
-            { id: "77728", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77728.jpg", unitsPerBox: 4 },
-            { id: "77729", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 18.14, volume: 0.23, image: "77729.jpg", unitsPerBox: 4 },
-            { id: "77730", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 23.79, volume: 0.21, image: "77730.jpg", unitsPerBox: 4 },
-            { id: "77732", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 21.72, volume: 0.17, image: "77732.jpg", unitsPerBox: 4 },
-            { id: "77733", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77733.jpg", unitsPerBox: 4 },
-            { id: "77734", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 18.14, volume: 0.23, image: "77734.jpg", unitsPerBox: 4 },
-            { id: "77735", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.28, volume: 0.21, image: "77735.jpg", unitsPerBox: 4 },
-            { id: "77848", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.41, volume: 0.17, image: "77848.jpg", unitsPerBox: 4 },
-            { id: "77849", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 RAYAS VERDE", price: 21.08, volume: 0.17, image: "77849.jpg", unitsPerBox: 4 },
-            { id: "77850", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.08, volume: 0.17, image: "77850.jpg", unitsPerBox: 4 },
-            { id: "77851", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 24.46, volume: 0.21, image: "77851.jpg", unitsPerBox: 4 },
-            { id: "77852", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77852.jpg", unitsPerBox: 4 },
-            { id: "77853", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYA AZUL CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77853.jpg", unitsPerBox: 4 },
-            { id: "77854", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 AZUL", price: 17.81, volume: 0.23, image: "77854.jpg", unitsPerBox: 4 },
-            { id: "77855", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS VERDE", price: 17.49, volume: 0.23, image: "77855.jpg", unitsPerBox: 4 },
-            { id: "77856", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS AZUL", price: 17.49, volume: 0.23, image: "77856.jpg", unitsPerBox: 4 },
-            { id: "77857", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 23.95, volume: 0.21, image: "77857.jpg", unitsPerBox: 4 },
-            { id: "77858", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77858.jpg", unitsPerBox: 4 },
-            { id: "77859", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS AZUL CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77859.jpg", unitsPerBox: 4 }
+            { id: "76410", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 MARINERO", price: 21.08, volume: 0.17, image: "76410.jpg" },
+            { id: "76462", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "76462.jpg" },
+            { id: "76463", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 MARINERO", price: 17.49, volume: 0.23, image: "76463.jpg" },
+            { id: "76464", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 MARINERO  CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "76464.jpg" },
+            { id: "77727", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 25.94, volume: 0.17, image: "77727.jpg" },
+            { id: "77728", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77728.jpg" },
+            { id: "77729", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 EST. MARINOS AZUL", price: 18.14, volume: 0.23, image: "77729.jpg" },
+            { id: "77730", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS AZUL CINTA PARA HOMBRO", price: 23.79, volume: 0.21, image: "77730.jpg" },
+            { id: "77732", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 21.72, volume: 0.17, image: "77732.jpg" },
+            { id: "77733", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.78, volume: 0.21, image: "77733.jpg" },
+            { id: "77734", name: "G. SILLA DE ALUMINIO FIJA 87X47X37 CM TEXTELINE 2X1 EST. MARINOS ROJO", price: 18.14, volume: 0.23, image: "77734.jpg" },
+            { id: "77735", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 EST. MARINOS ROJO CINTA PARA HOMBRO", price: 24.28, volume: 0.21, image: "77735.jpg" },
+            { id: "77848", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.41, volume: 0.17, image: "77848.jpg" },
+            { id: "77849", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 RAYAS VERDE", price: 21.08, volume: 0.17, image: "77849.jpg" },
+            { id: "77850", name: "G. SILLA DE ALUMINIO 87X51X23 CM TEXTELINE 2X1 AZUL", price: 21.08, volume: 0.17, image: "77850.jpg" },
+            { id: "77851", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 24.46, volume: 0.21, image: "77851.jpg" },
+            { id: "77852", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77852.jpg" },
+            { id: "77853", name: "G. SILLA DE ALUMINIO 108X47X30 CM TEXTELINE 2X1 RAYA AZUL CINTA PARA HOMBRO", price: 24.14, volume: 0.21, image: "77853.jpg" },
+            { id: "77854", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 AZUL", price: 17.81, volume: 0.23, image: "77854.jpg" },
+            { id: "77855", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS VERDE", price: 17.49, volume: 0.23, image: "77855.jpg" },
+            { id: "77856", name: "G. SILLA DE ALUMINIO 87X47X37 CM TEXTELINE 2X1 RAYAS AZUL", price: 17.49, volume: 0.23, image: "77856.jpg" },
+            { id: "77857", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 AZUL CINTA PARA HOMBRO", price: 23.95, volume: 0.21, image: "77857.jpg" },
+            { id: "77858", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS VERDE CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77858.jpg" },
+            { id: "77859", name: "G. SILLA DE ALUMINIO ALTA 106X47X45 CM TEXTELINE 2X1 RAYAS AZUL CINTA PARA HOMBRO", price: 23.64, volume: 0.21, image: "77859.jpg" }
         ];
 
-        const containerVolume = 65;
-        const containerCost = 11800;
+        const containerVolume = 65; // Volumen total del contenedor en metros cúbicos
+
+        function updateContainer() {
+            let totalVolume = 0;
+            let totalCost = 0;
+            let anyChairSelected = false;
+
+            chairs.forEach((chair) => {
+                const quantity = Math.max(0, parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0);
+                totalVolume += chair.volume * quantity;
+                totalCost += chair.price * quantity;
+                if (quantity > 0) {
+                    anyChairSelected = true;
+                }
+            });
+
+            const containerStatus = document.getElementById('container-status');
+            const totalCostElement = document.getElementById('total-cost');
+            const advancePaymentElement = document.getElementById('advance-payment');
+            const containerProgressBar = document.getElementById('container-progress-bar');
+            const downloadButton = document.getElementById('download-button');
+
+            const percentageOccupied = (totalVolume / containerVolume) * 100;
+            containerStatus.textContent = `El contenedor está al ${percentageOccupied.toFixed(2)}% de su capacidad total`;
+
+            totalCost = Math.round(totalCost * 100) / 100;
+            totalCostElement.textContent = `Coste total: ${totalCost.toFixed(2)} €`;
+            
+            const advancePayment = Math.round(totalCost * 20) / 100;
+            advancePaymentElement.textContent = `Pago por adelantado (20%): ${advancePayment.toFixed(2)} €`;
+
+            containerProgressBar.style.width = `${Math.min(percentageOccupied, 100)}%`;
+
+            if (percentageOccupied > 100) {
+                containerStatus.style.color = 'red';
+                containerProgressBar.style.backgroundColor = 'red';
+            } else if (percentageOccupied === 100) {
+                containerStatus.style.color = 'green';
+                containerProgressBar.style.backgroundColor = 'green';
+            } else {
+                containerStatus.style.color = 'black';
+                containerProgressBar.style.backgroundColor = '#4CAF50';
+            }
+
+            downloadButton.style.display = anyChairSelected ? 'block' : 'none';
+
+            updateOrderSummary();
+
+            console.log('Total Cost:', totalCost);
+            console.log('Advance Payment:', advancePayment);
+        }
+
+        function showQuantityFeedback(id) {
+            const feedbackElement = document.getElementById(`feedback-${id}`);
+            feedbackElement.style.display = 'block';
+            
+            let totalVolume = 0;
+            chairs.forEach((chair) => {
+                const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
+                totalVolume += chair.volume * quantity;
+            });
+            
+            const percentageOccupied = (totalVolume / containerVolume) * 100;
+            feedbackElement.textContent = `Cantidad actualizada. El contenedor está al ${percentageOccupied.toFixed(2)}% de su capacidad.`;
+            
+            if (percentageOccupied > 100) {
+                feedbackElement.style.color = 'red';
+                feedbackElement.textContent += " ¡Contenedor sobrepasado!";
+            } else if (percentageOccupied === 100) {
+                feedbackElement.style.color = 'green';
+                feedbackElement.textContent += " ¡Contenedor lleno!";
+            } else {
+                feedbackElement.style.color = 'green';
+            }
+            
+            setTimeout(() => {
+                feedbackElement.style.display = 'none';
+            }, 3000);
+        }
 
         function initializeChairList() {
             const chairList = document.getElementById('chair-list');
@@ -239,7 +316,6 @@
                     <img src="images/${chair.image}" alt="${chair.name}">
                     <h3>${chair.id} - ${chair.name}</h3>
                     <p>Precio: ${chair.price.toFixed(2)} €</p>
-                    <p>Unidades por caja: ${chair.unitsPerBox}</p>
                     <div class="quantity-container">
                         <label for="quantity-${chair.id}">Cantidad Cajas:</label>
                         <input type="number" id="quantity-${chair.id}" min="0" value="0" onchange="updateContainer(); showQuantityFeedback('${chair.id}')">
@@ -248,51 +324,6 @@
                 `;
                 chairList.appendChild(chairElement);
             });
-        }
-
-        function updateContainer() {
-            let totalVolume = 0;
-            let totalCost = 0;
-
-            chairs.forEach((chair) => {
-                const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
-                totalVolume += chair.volume * quantity;
-                totalCost += chair.price * quantity;
-            });
-
-            const containerPercentage = (totalVolume / containerVolume) * 100;
-            const containerStatus = document.getElementById('container-status');
-            const containerProgressBar = document.getElementById('container-progress-bar');
-            const totalCostElement = document.getElementById('total-cost');
-            const advancePaymentElement = document.getElementById('advance-payment');
-            const downloadButton = document.getElementById('download-button');
-
-            containerStatus.textContent = `Contenedor: ${totalVolume.toFixed(2)} m³ / ${containerVolume.toFixed(2)} m³ (${containerPercentage.toFixed(2)}%)`;
-            containerProgressBar.style.width = `${Math.min(containerPercentage, 100)}%`;
-            containerProgressBar.style.backgroundColor = containerPercentage > 100 ? 'red' : '#4CAF50';
-
-            totalCostElement.textContent = `Coste total: ${totalCost.toFixed(2)} €`;
-
-            const advancePayment = Math.max(containerCost, totalCost * 0.3);
-            advancePaymentElement.textContent = `Pago por adelantado: ${advancePayment.toFixed(2)} €`;
-
-            downloadButton.style.display = totalVolume > 0 ? 'block' : 'none';
-
-            updateOrderSummary();
-        }
-
-        function showQuantityFeedback(chairId) {
-            const quantity = parseInt(document.getElementById(`quantity-${chairId}`).value) || 0;
-            const feedbackElement = document.getElementById(`feedback-${chairId}`);
-            const chair = chairs.find(c => c.id === chairId);
-
-            if (quantity > 0) {
-                const totalUnits = quantity * chair.unitsPerBox;
-                feedbackElement.textContent = `Total unidades: ${totalUnits}`;
-                feedbackElement.style.display = 'block';
-            } else {
-                feedbackElement.style.display = 'none';
-            }
         }
 
         function updateOrderSummary() {
@@ -309,8 +340,6 @@
                         <div>
                             <h3>${chair.id} - ${chair.name}</h3>
                             <p>Cantidad Cajas: ${quantity}</p>
-                            <p>Unidades por caja: ${chair.unitsPerBox}</p>
-                            <p>Total unidades: ${quantity * chair.unitsPerBox}</p>
                             <p>Precio unitario: ${chair.price.toFixed(2)} €</p>
                             <p>Subtotal: ${(chair.price * quantity).toFixed(2)} €</p>
                         </div>
@@ -323,7 +352,7 @@
         async function downloadExcel() {
             const workbook = XLSX.utils.book_new();
             const worksheet = XLSX.utils.aoa_to_sheet([
-                ['Código', 'Nombre', 'Cantidad Cajas', 'Unidades por caja', 'Total unidades', 'Precio Unitario', 'Subtotal', 'Imagen']
+                ['Código', 'Nombre', 'Cantidad', 'Precio Unitario', 'Subtotal', 'Imagen']
             ]);
 
             let row = 1;
@@ -331,35 +360,37 @@
                 const quantity = parseInt(document.getElementById(`quantity-${chair.id}`).value) || 0;
                 if (quantity > 0) {
                     const subtotal = chair.price * quantity;
-                    const totalUnits = quantity * chair.unitsPerBox;
                     XLSX.utils.sheet_add_aoa(worksheet, [[
                         chair.id,
                         chair.name,
                         quantity,
-                        chair.unitsPerBox,
-                        totalUnits,
                         chair.price.toFixed(2),
                         subtotal.toFixed(2),
                         '(Imagen)'
                     ]], { origin: -1 });
 
+                    // Añadir imagen
                     try {
-                        const response = await fetch(`images/${chair.image}`);
-                        const blob = await response.blob();
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const base64 = e.target.result.split(',')[1];
-                            worksheet[`H${row + 1}`] = {
-                                t: 's',
-                                v: base64,
-                                s: {
-                                    patternType: 'solid',
-                                    fgColor: { rgb: "FFFFAA00" },
-                                    bgColor: { rgb: "FFFFFF00" }
-                                }
-                            };
-                        };
-                        reader.readAsDataURL(blob);
+                        const imgBlob = await fetch(`images/${chair.image}`).then(r => r.blob());
+                        const base64 = await new Promise((resolve) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve(reader.result.split(',')[1]);
+                            reader.readAsDataURL(imgBlob);
+                        });
+
+                        const imgId = workbook.addImage({
+                            base64: base64,
+                            extension: 'jpg',
+                        });
+
+                        worksheet['!images'] = worksheet['!images'] || [];
+                        worksheet['!images'].push({
+                            image: imgId,
+                            range: {
+                                s: { r: row, c: 5 },
+                                e: { r: row + 1, c: 6 }
+                            }
+                        });
                     } catch (error) {
                         console.error('Error al cargar la imagen:', error);
                     }
@@ -368,26 +399,24 @@
                 }
             }
 
-            const maxWidth = Math.max(...Object.keys(worksheet).map(cell => parseInt(cell.slice(1))).filter(row => row > 1).map(row => worksheet[`B${row}`].v.length));
-            worksheet['!cols'] = [
-                { wch: 10 },
-                { wch: maxWidth },
-                { wch: 15 },
-                { wch: 15 },
-                { wch: 15 },
-                { wch: 15 },
-                { wch: 15 },
-                { wch: 20 }
-            ];
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Pedido');
 
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Pedido");
-            XLSX.writeFile(workbook, "pedido_sillas_playa.xlsx");
+            // Ajustar ancho de columnas
+            const wscols = [
+                {wch: 10},
+                {wch: 50},
+                {wch: 10},
+                {wch: 15},
+                {wch: 15},
+                {wch: 20}
+            ];
+            worksheet['!cols'] = wscols;
+
+            XLSX.writeFile(workbook, 'Pedido_Sillas_Playa.xlsx');
         }
 
-        window.onload = function() {
-            initializeChairList();
-            updateContainer();
-        };
+        initializeChairList();
+        updateContainer();
     </script>
 </body>
 </html>
